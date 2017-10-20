@@ -10,11 +10,13 @@ node ('master') {
         w1: {
             stage ("Start webapp 1"){
             // start web app 1
+            echo "start web app 1"
             }
         },
         w2: {
             stage ("Start webapp 2"){
             // start web app 2
+            echo "start web app 2"
             }
         }
         )
@@ -23,11 +25,13 @@ node ('master') {
         getw1: {
             stage ("Access webapp 1"){
             // access web app 1
+            echo "hello from web app 1"
             }
         },
         getw2: {
             stage ("Access webapp 2"){
             // access web app 2
+            echo "hello from web app 2"
             }
         }
         )
@@ -36,21 +40,17 @@ node ('master') {
 
         echo "Asking for user input"
         try{
-                timeout(time: 60, unit: 'SECONDS') {
-                    doDestroy = input(
-                        id: 'Proceed1', message: 'Continue destroying?', parameters: [
-                        [$class: 'BooleanParameterDefinition', defaultValue: 'no', description: '', name:'Continue the destroy']
-                    ])
-                }
-            }
-            catch(err) {
-                doDestroy='no'
-                echo "Timeout occured, destroy is not continuing"
-            }
+            def userInput = input(
+             id: 'userInput', message: 'Let\'s destroy?', parameters: [
+             [$class: 'TextParameterDefinition', defaultValue: 'no', description: 'Destroy', name: 'input1']
+            ])
+            echo ("User Input: "+userInput['input1'])
 
-        if (doDestroy){
+        if ( userInput != "no" ){
             stage "Destroy all apps"
-			// Stop web app
+			// Stop web apps
+            echo "stop web app 1"
+            echo "stop web app 2"
 	        }
 
 	}
