@@ -3,7 +3,7 @@
 node ('master') {
 	
 	stage('Git checkout') {
-		git branch: 'master', changelog: false, credentialsId: 'b3f71829-edcd-46c6-b83f-59b98eb9695d', poll: false, url: 'git@github.com:tarunmittalid/exercise1.git'	
+		git branch: 'master', changelog: false, credentialsId: '1766cbec-c015-4682-91b1-5b66d41f5996', poll: false, url: 'git@github.com:tarunmittalid/exercise1.git'	
 		}
 
     parallel (
