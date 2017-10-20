@@ -44,7 +44,7 @@ node ('master') {
                 timeout(time: 60, unit: 'SECONDS') {
                     doDestroy = input(
                         id: 'Proceed1', message: 'Continue destroying?', parameters: [
-                        [$class: 'BooleanParameterDefinition', defaultValue: 'no', description: '', name:'Continue the destroy']
+                        [$class: 'BooleanParameterDefinition', defaultValue: 'no', description: 'destroy', name:'Continue the destroy']
                     ])
                 }
             }
