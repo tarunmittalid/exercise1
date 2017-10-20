@@ -2,6 +2,7 @@
 
 node ('master') {
 	
+    def doDestroy='no'
 	stage('Git checkout') {
 		git branch: 'master', changelog: false, credentialsId: '1766cbec-c015-4682-91b1-5b66d41f5996', poll: false, url: 'git@github.com:tarunmittalid/exercise1.git'	
 		}
@@ -39,19 +40,26 @@ node ('master') {
 	stage('User innput') {
 
         echo "Asking for user input"
-        def userInput = input(
-         id: 'userInput', message: 'Let\'s destroy?', parameters: [
-         [$class: 'TextParameterDefinition', defaultValue: 'no', description: 'Destroy', name: 'input1']
-        ])
-        echo ("User Input: "+userInput['input1'])
-
-        if ( userInput != "no" ){
-            stage "Destroy all apps" {
-    			// Stop web apps
-                echo "stop web app 1"
-                echo "stop web app 2"
+        try{
+                timeout(time: 60, unit: 'SECONDS') {
+                    doDestroy = input(
+                        id: 'Proceed1', message: 'Continue destroying?', parameters: [
+                        [$class: 'BooleanParameterDefinition', defaultValue: 'no', description: '', name:'Continue the destroy']
+                    ])
+                }
             }
-	        }
+            catch(err) {
+                doDestroy='no'
+                echo "Timeout occured, destroy is not continuing"
+            }
+
+        if (doDestroy != "no"){
+            stage "Destroy all apps" {
+            // Stop web app
+            echo "stop web app 1"
+            echo "stop web app 2"
+            }
+        }
 
 	}
 
