@@ -10,10 +10,12 @@ node ('master') {
         w1: {
             stage ("Start webapp 1"){
             // start web app 1
+            }
         },
         w2: {
             stage ("Start webapp 2"){
             // start web app 2
+            }
         }
         )
 
@@ -21,10 +23,12 @@ node ('master') {
         get-w1: {
             stage ("Access webapp 1"){
             // access web app 1
+            }
         },
         get-w2: {
             stage ("Access webapp 2"){
             // access web app 2
+            }
         }
         )
 
