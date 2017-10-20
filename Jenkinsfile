@@ -20,12 +20,12 @@ node ('master') {
         )
 
     parallel (
-        get-w1: {
+        getw1: {
             stage ("Access webapp 1"){
             // access web app 1
             }
         },
-        get-w2: {
+        getw2: {
             stage ("Access webapp 2"){
             // access web app 2
             }
